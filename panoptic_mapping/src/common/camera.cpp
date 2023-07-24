@@ -170,7 +170,7 @@ voxblox::BlockIndexList Camera::findVisibleBlocks(const Submap& submap,
     const Point p_C =
         T_C_S * (block.origin() + Point(1, 1, 1) * block_size /
                                       2.0);  // Center point of the block.
-    if (max_range > 0 && p_C.norm() > config_.max_range + block_diag_half) {
+    if (max_range > 0 && p_C.squaredNorm() > pow(config_.max_range + block_diag_half, 2)) {
       continue;
     }
     if (pointIsInViewFrustum(p_C, block_diag_half)) {

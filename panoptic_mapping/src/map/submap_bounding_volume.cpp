@@ -63,7 +63,7 @@ void SubmapBoundingVolume::update() {
 
 bool SubmapBoundingVolume::contains_S(const Point& point_S) const {
   // Point is expected in submap frame.
-  return (center_ - point_S).norm() <= radius_;
+  return (center_ - point_S).squaredNorm() <= pow(radius_,2);
 }
 
 bool SubmapBoundingVolume::contains_M(const Point& point_M) const {
@@ -73,8 +73,8 @@ bool SubmapBoundingVolume::contains_M(const Point& point_M) const {
 bool SubmapBoundingVolume::intersects(const SubmapBoundingVolume& other) const {
   const Transformation T_S_other =
       submap_->getT_S_M() * other.submap_->getT_M_S();
-  return (center_ - T_S_other * other.center_).norm() <=
-         radius_ + other.radius_;
+  return (center_ - T_S_other * other.center_).squaredNorm() <=
+         pow(radius_ + other.radius_,2);
 }
 
 bool SubmapBoundingVolume::isInsidePlane_S(const Point& normal_S) const {

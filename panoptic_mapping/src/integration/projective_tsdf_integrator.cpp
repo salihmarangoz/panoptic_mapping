@@ -217,9 +217,9 @@ bool ProjectiveIntegrator::computeSignedDistance(const Point& p_C,
   if (p_C.z() < 0.0) {
     return false;
   }
-  const float distance_to_voxel = p_C.norm();
-  if (distance_to_voxel < cam_config_->min_range ||
-      distance_to_voxel > cam_config_->max_range) {
+  const float distance_to_voxel_sq = p_C.squaredNorm();
+  if (distance_to_voxel_sq < pow(cam_config_->min_range, 2) ||
+      distance_to_voxel_sq > pow(cam_config_->max_range, 2)) {
     return false;
   }
 
@@ -234,7 +234,7 @@ bool ProjectiveIntegrator::computeSignedDistance(const Point& p_C,
   interpolator->computeWeights(u, v, range_image_);
   const float distance_to_surface =
       interpolator->interpolateRange(range_image_);
-  *sdf = distance_to_surface - distance_to_voxel;
+  *sdf = distance_to_surface - sqrt(distance_to_voxel_sq);
   return true;
 }
 
