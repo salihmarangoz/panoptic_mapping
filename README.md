@@ -66,7 +66,6 @@ To install on linux, follow the instructions below matching your OS and ROS vers
 <details>
   <summary>Ubuntu 18.04 + ROS Melodic.</summary>
 <p>
-
 **Prerequisites**
 
 1. If not already done so, install [ROS](http://wiki.ros.org/ROS/Installation) (Desktop-Full is recommended).
@@ -311,3 +310,41 @@ To add to this repository:
     ```
 * Please open a [Pull Request](https://github.com/ethz-asl/panoptic_mapping/pulls) for your changes.
 * Thank you for contributing!
+
+# ---------------------------------
+
+## Salih's Notes
+
+```bash
+# MAIN CODE
+cd ~/catkin_ws/src
+git clone git@github.com:salihmarangoz/panoptic_mapping.git
+
+# DEPENDENCIES
+git clone git@github.com:salihmarangoz/panoptic_mapping.git
+git clone git@github.com:catkin/catkin_simple.git
+git clone git@github.com:ethz-asl/eigen_catkin.git
+git clone git@github.com:ethz-asl/eigen_checks.git
+git clone git@github.com:ethz-asl/gflags_catkin.git
+git clone git@github.com:ethz-asl/glog_catkin.git
+git clone git@github.com:ethz-asl/minkindr.git
+git clone git@github.com:ethz-asl/minkindr_ros.git
+git clone git@github.com:ethz-asl/protobuf_catkin.git
+git clone git@github.com:ethz-asl/opencv3_catkin.git
+git clone git@github.com:ethz-asl/numpy_eigen.git
+git clone git@github.com:ethz-asl/catkin_boost_python_buildtool.git
+git clone git@github.com:CogRob/catkin_grpc.git
+git clone git@github.com:ethz-asl/voxblox.git -b devel/panoptic_mapping
+git clone git@github.com:ethz-asl/cblox.git
+
+# DATASET
+roscd panoptic_mapping_utils
+export FLAT_DATA_DIR="/home/salih/Desktop/hiwi/hiwi3_ws/datasets"  # Or whichever path you prefer.
+#export FLAT_DATA_DIR="/home/$USER/Documents"  # Or whichever path you prefer.
+chmod +x scripts/download_flat_dataset.sh
+./scripts/download_flat_dataset.sh
+
+# RUN WITH FLAT DATASET
+roslaunch panoptic_mapping_ros run_salih.launch
+```
+
