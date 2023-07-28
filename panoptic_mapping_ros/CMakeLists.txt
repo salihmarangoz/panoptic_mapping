@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(panoptic_mapping_ros)
 
+add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
+add_link_options(-fsanitize=address -fno-omit-frame-pointer)
+
 set(CMAKE_CXX_STANDARD 17)
 find_package(catkin_simple REQUIRED)
 catkin_simple(ALL_DEPS_REQUIRED)
