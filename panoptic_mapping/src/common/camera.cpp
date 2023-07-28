@@ -209,6 +209,7 @@ cv::Mat Camera::computeVertexMap(const cv::Mat& depth_image) const {
     for (int u = 0; u < depth_image.cols; u++) {
       cv::Vec3f& vertex = vertices.at<cv::Vec3f>(v, u);  // x, y, z
       vertex[2] = depth_image.at<float>(v, u);
+      if (!std::isfinite(vertex[2])) vertex[2] = 0.0;
       vertex[0] = (static_cast<float>(u) - config_.vx) * vertex[2] * fx_inv;
       vertex[1] = (static_cast<float>(v) - config_.vy) * vertex[2] * fy_inv;
     }
